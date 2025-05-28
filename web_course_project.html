@@ -13,13 +13,22 @@
         .nav-link { color: #fff !important; font-weight: 500; margin-right: 1rem; }
         .nav-link.active, .nav-link:hover { color: #ffd600 !important; }
         .hero-section {
-            background: linear-gradient(rgba(56,142,60,0.8),rgba(56,142,60,0.8)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-            color: #fff; min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            color: #fff;
+            min-height: 70vh;
             position: relative;
             overflow: hidden;
         }
-        .hero-section h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
-        .hero-section p { font-size: 1.3rem; font-weight: 400; }
+        .hero-section h1 { 
+            font-size: 3rem; 
+            font-weight: 700; 
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero-section p { 
+            font-size: 1.3rem; 
+            font-weight: 400;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
         .section-title { font-weight: 700; color: #388e3c; margin-bottom: 2rem; text-align: center; letter-spacing: 1px; }
         .card { border: none; border-radius: 18px; box-shadow: 0 6px 32px rgba(56,142,60,0.08); transition: transform 0.2s, box-shadow 0.2s; }
         .card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 12px 40px rgba(56,142,60,0.15); }
@@ -40,9 +49,10 @@
             .hero-section p { font-size: 1rem; }
         }
         
-        /* New styles for slider */
+        /* Updated slider styles */
         .slider-container {
             width: 100%;
+            height: 70vh;
             position: relative;
             overflow: hidden;
         }
@@ -50,10 +60,35 @@
             display: flex;
             transition: transform 0.5s ease-in-out;
             width: 300%;
+            height: 100%;
         }
         .slide {
             width: 100%;
             flex-shrink: 0;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+        .slide .container {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
         .slider-nav {
             position: absolute;
@@ -72,6 +107,7 @@
             justify-content: center;
             font-size: 1.5rem;
             transition: background 0.3s;
+            z-index: 3;
         }
         .slider-nav:hover {
             background: rgba(255, 255, 255, 0.5);
@@ -111,22 +147,22 @@
     <section class="hero-section" id="home">
         <div class="slider-container">
             <div class="slider">
-                <div class="slide">
+                <div class="slide" style="background-image: url('https://images.hindustantimes.com/img/2022/09/17/1600x900/modi_farming_1663397677325_1663397686098_1663397686098.jpg');">
+                    <div class="container">
+                        <h1>Vision for Agriculture</h1>
+                        <p>Transforming Indian farming through technology and innovation</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: linear-gradient(rgba(56,142,60,0.8),rgba(56,142,60,0.8)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');">
                     <div class="container">
                         <h1>Empowering Indian Farmers</h1>
                         <p>Modern solutions, expert guidance, and real-time insights for a sustainable agricultural future.</p>
                     </div>
                 </div>
-                <div class="slide">
+                <div class="slide" style="background-image: url('https://img.etimg.com/thumb/width-1200,height-900,imgsize-829647,resizemode-75,msid-94243017/news/india/pm-modi-releases-rs-16000-crores-under-pm-kisan-scheme.jpg');">
                     <div class="container">
-                        <h1>Digital Agriculture</h1>
-                        <p>Leveraging technology to transform farming practices and increase productivity.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="container">
-                        <h1>Sustainable Farming</h1>
-                        <p>Promoting eco-friendly practices for a better tomorrow.</p>
+                        <h1>Supporting Our Farmers</h1>
+                        <p>Committed to doubling farmer income through progressive policies</p>
                     </div>
                 </div>
             </div>
