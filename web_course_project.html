@@ -15,6 +15,8 @@
         .hero-section {
             background: linear-gradient(rgba(56,142,60,0.8),rgba(56,142,60,0.8)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
             color: #fff; min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         .hero-section h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
         .hero-section p { font-size: 1.3rem; font-weight: 400; }
@@ -36,6 +38,49 @@
         @media (max-width: 767px) {
             .hero-section h1 { font-size: 2rem; }
             .hero-section p { font-size: 1rem; }
+        }
+        
+        /* New styles for slider */
+        .slider-container {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 300%;
+        }
+        .slide {
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: background 0.3s;
+        }
+        .slider-nav:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .prev-slide {
+            left: 20px;
+        }
+        .next-slide {
+            right: 20px;
         }
     </style>
 </head>
@@ -64,9 +109,29 @@
 
     <!-- Hero -->
     <section class="hero-section" id="home">
-        <div class="container">
-            <h1>Empowering Indian Farmers</h1>
-            <p>Modern solutions, expert guidance, and real-time insights for a sustainable agricultural future.</p>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <div class="container">
+                        <h1>Empowering Indian Farmers</h1>
+                        <p>Modern solutions, expert guidance, and real-time insights for a sustainable agricultural future.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="container">
+                        <h1>Digital Agriculture</h1>
+                        <p>Leveraging technology to transform farming practices and increase productivity.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="container">
+                        <h1>Sustainable Farming</h1>
+                        <p>Promoting eco-friendly practices for a better tomorrow.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-nav prev-slide">❮</button>
+            <button class="slider-nav next-slide">❯</button>
         </div>
     </section>
 
@@ -177,7 +242,7 @@
             <div class="card-body">
               <h5 class="card-title">PM Krishi Sinchayee Yojana (PMKSY)</h5>
               <ul class="scheme-list">
-                <li>Focus: “Har Khet Ko Pani”, “More Crop Per Drop”</li>
+                <li>Focus: "Har Khet Ko Pani", "More Crop Per Drop"</li>
                 <li>Includes: Drip/sprinkler irrigation, watershed, micro-irrigation</li>
                 <li><a href="https://www.pmksy.gov.in/" target="_blank">Details</a></li>
               </ul>
@@ -372,7 +437,7 @@ Collaboration with IARI, IIHR, and AgMoOCs for online farmer education.<br>
           <div class="card h-100">
             <div class="card-body">
               <h5 style="text-align: center;"><strong>INTRODUCTION</strong></h5>
-              <p>To empower farmers, reduce input costs, and enhance productivity, the Government of India provides a wide range of subsidies, financial support, and mechanization schemes. These initiatives aim to make modern farming tools, quality inputs, and technology accessible to every farmer—especially small and marginal ones. From seed and fertilizer subsidies to affordable credit, solar pumps, and equipment rental services, these programs are driving inclusive agricultural growth and ensuring better income and sustainability for India’s farming community.</p><br>
+              <p>To empower farmers, reduce input costs, and enhance productivity, the Government of India provides a wide range of subsidies, financial support, and mechanization schemes. These initiatives aim to make modern farming tools, quality inputs, and technology accessible to every farmer—especially small and marginal ones. From seed and fertilizer subsidies to affordable credit, solar pumps, and equipment rental services, these programs are driving inclusive agricultural growth and ensuring better income and sustainability for India's farming community.</p><br>
               <p>These schemes are implemented through Direct Benefit Transfer (DBT) to ensure transparency and timely delivery of support. Special focus is given to promoting eco-friendly practices, digital agriculture, and women and youth participation in farming. By encouraging the adoption of advanced machinery, agri-drones, precision farming, and solar-powered solutions, the government is transforming traditional agriculture into a modern, resilient, and technology-driven sector.</p>
             </div>
           </div>
@@ -552,6 +617,33 @@ Special support for pulses, oilseeds, and millets.</p><br>
                 }
             });
         });
+
+        // Slider functionality
+        const slider = document.querySelector('.slider');
+        const prevButton = document.querySelector('.prev-slide');
+        const nextButton = document.querySelector('.next-slide');
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100/totalSlides}%)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+
+        // Auto-advance slides every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
 
         // Contact form submission
         document.getElementById('contactForm').addEventListener('submit', function(e){
