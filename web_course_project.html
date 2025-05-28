@@ -17,7 +17,6 @@
             min-height: 70vh;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(rgba(56,142,60,0.8),rgba(56,142,60,0.8)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
         }
         .hero-section h1 { 
             font-size: 3rem; 
@@ -67,30 +66,55 @@
             width: 100%;
             flex-shrink: 0;
             position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
-        .content-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-        }
-        .modi-image {
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
         }
         .slide .container {
+            position: relative;
+            z-index: 2;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+        }
+        .content-with-images {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+        .side-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .center-content {
+            margin: 0 20px;
+            flex: 1;
+            text-align: center;
+        }
+        .left-image {
+            margin-right: 20px;
+        }
+        .right-image {
+            margin-left: 20px;
         }
         .slider-nav {
             position: absolute;
@@ -119,6 +143,22 @@
         }
         .next-slide {
             right: 20px;
+        }
+        @media (max-width: 768px) {
+            .content-with-images {
+                flex-direction: column;
+            }
+            .side-image {
+                width: 150px;
+                height: 150px;
+                margin: 10px 0;
+            }
+            .left-image, .right-image {
+                margin: 10px 0;
+            }
+            .center-content {
+                margin: 20px 0;
+            }
         }
     </style>
 </head>
@@ -149,31 +189,28 @@
     <section class="hero-section" id="home">
         <div class="slider-container">
             <div class="slider">
-                <div class="slide">
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/2382904/pexels-photo-2382904.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
                     <div class="container">
-                        <div class="content-wrapper">
-                            <img src="https://www.narendramodi.in/pmwebimages/PM_Modi_at_ICAR_1.jpg" alt="PM Modi Agriculture Vision" class="modi-image">
-                            <h1>Vision for Agriculture</h1>
-                            <p>Direct interaction with farmers to understand grassroot challenges</p>
+                        <div class="content-with-images">
+                            <img src="https://www.narendramodi.in/pmwebimages/PM_Modi_at_ICAR_1.jpg" alt="Modi Left" class="side-image left-image">
+                            <div class="center-content">
+                                <h1>Vision for Agriculture</h1>
+                                <p>Direct interaction with farmers to understand grassroot challenges</p>
+                            </div>
+                            <img src="https://www.narendramodi.in/pmwebimages/PM_Modi_with_farmers_2.jpg" alt="Modi Right" class="side-image right-image">
                         </div>
                     </div>
                 </div>
-                <div class="slide">
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
                     <div class="container">
-                        <div class="content-wrapper">
-                            <img src="https://www.narendramodi.in/pmwebimages/PM_Modi_with_farmers_2.jpg" alt="PM Modi with Farmers" class="modi-image">
-                            <h1>Empowering Indian Farmers</h1>
-                            <p>Modern solutions, expert guidance, and real-time insights for a sustainable agricultural future.</p>
-                        </div>
+                        <h1>Empowering Indian Farmers</h1>
+                        <p>Modern solutions, expert guidance, and real-time insights for a sustainable agricultural future.</p>
                     </div>
                 </div>
-                <div class="slide">
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/2933243/pexels-photo-2933243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
                     <div class="container">
-                        <div class="content-wrapper">
-                            <img src="https://www.narendramodi.in/pmwebimages/PM_Modi_agriculture_3.jpg" alt="PM Modi Agricultural Innovation" class="modi-image">
-                            <h1>Research & Innovation</h1>
-                            <p>Promoting advanced agricultural research and sustainable farming practices</p>
-                        </div>
+                        <h1>Research & Innovation</h1>
+                        <p>Promoting advanced agricultural research and sustainable farming practices</p>
                     </div>
                 </div>
             </div>
